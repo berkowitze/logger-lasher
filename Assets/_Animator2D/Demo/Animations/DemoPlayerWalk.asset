@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 289bc996b5dd9d54d8eef48bb17a3e1e, type: 3}
+  m_Name: DemoPlayerWalk
+  m_EditorClassIdentifier: 
+  duration: 0.6666667
+  fps: 12
+  frames:
+  - sprite: {fileID: 219615446, guid: 9a1b01342aefd494fb05b2dd8e14faf7, type: 3}
+    duration: 1
+  - sprite: {fileID: -661439954, guid: 9a1b01342aefd494fb05b2dd8e14faf7, type: 3}
+    duration: 1
+  - sprite: {fileID: 2000667232, guid: 9a1b01342aefd494fb05b2dd8e14faf7, type: 3}
+    duration: 1
+  - sprite: {fileID: 335888793, guid: 9a1b01342aefd494fb05b2dd8e14faf7, type: 3}
+    duration: 1
+  - sprite: {fileID: -241043548, guid: 9a1b01342aefd494fb05b2dd8e14faf7, type: 3}
+    duration: 1
+  - sprite: {fileID: 912191018, guid: 9a1b01342aefd494fb05b2dd8e14faf7, type: 3}
+    duration: 1
+  - sprite: {fileID: 51702241, guid: 9a1b01342aefd494fb05b2dd8e14faf7, type: 3}
+    duration: 1
+  - sprite: {fileID: 148715048, guid: 9a1b01342aefd494fb05b2dd8e14faf7, type: 3}
+    duration: 1
+  timedAnimationEvents: []

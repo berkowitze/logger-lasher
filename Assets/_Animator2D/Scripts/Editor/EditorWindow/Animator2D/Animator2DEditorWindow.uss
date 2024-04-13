@@ -1,0 +1,48 @@
+.control-button {
+    width: 25px;
+    padding-left: 3px;
+    padding-right: 4px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-right-width: 1px;
+    border-left-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+.control-button:focus {
+    width: 25px;
+    padding-left: 3px;
+    padding-right: 4px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.control-button > VisualElement {
+    -unity-background-scale-mode: scale-to-fit;
+    width: 100%;
+    height: 100%;
+}
+
+.button-leftaligned > .control-button {
+    border-left-width: 0;
+    border-right-width: 1px;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+.button-rightaligned > .control-button {
+    border-left-width: 1px;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+.pause {
+    background-color: rgb(80, 80, 80);
+}

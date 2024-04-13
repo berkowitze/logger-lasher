@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 289bc996b5dd9d54d8eef48bb17a3e1e, type: 3}
+  m_Name: DemoPlayerJump
+  m_EditorClassIdentifier: 
+  duration: 0.75
+  fps: 12
+  frames:
+  - sprite: {fileID: -821785790, guid: 5f16aaa956b951147ac186a482c8be5f, type: 3}
+    duration: 1
+  - sprite: {fileID: 720822919, guid: 5f16aaa956b951147ac186a482c8be5f, type: 3}
+    duration: 1
+  - sprite: {fileID: -1522260391, guid: 5f16aaa956b951147ac186a482c8be5f, type: 3}
+    duration: 1
+  - sprite: {fileID: 70815024, guid: 5f16aaa956b951147ac186a482c8be5f, type: 3}
+    duration: 1
+  - sprite: {fileID: -42991947, guid: 5f16aaa956b951147ac186a482c8be5f, type: 3}
+    duration: 1
+  - sprite: {fileID: -1899458786, guid: 5f16aaa956b951147ac186a482c8be5f, type: 3}
+    duration: 1
+  - sprite: {fileID: -190641706, guid: 5f16aaa956b951147ac186a482c8be5f, type: 3}
+    duration: 1
+  - sprite: {fileID: 1070242073, guid: 5f16aaa956b951147ac186a482c8be5f, type: 3}
+    duration: 1
+  - sprite: {fileID: -1848681139, guid: 5f16aaa956b951147ac186a482c8be5f, type: 3}
+    duration: 1
+  timedAnimationEvents: []

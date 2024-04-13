@@ -1,0 +1,21 @@
+{
+    "name": "EtienneEditor.Animator2D",
+    "rootNamespace": "",
+    "references": [
+        "GUID:70a55019e04c45648855ebeb3756277e",
+        "GUID:5f39b56521c204e4686009726ce1f40c",
+        "GUID:22ded8885bc72c54599b382643fa9d31",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

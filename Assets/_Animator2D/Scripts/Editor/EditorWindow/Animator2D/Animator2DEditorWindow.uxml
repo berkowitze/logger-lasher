@@ -1,0 +1,43 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/_Animator2D/Scripts/Editor/EditorWindow/Animator2D/Animator2DEditorWindow.uss?fileID=7433441132597879392&amp;guid=3f3e5ab9d65d1f44eb81193a416078d9&amp;type=3#Animator2DEditorWindow" />
+    <EtienneEditor.Animator2D.SplitView fixed-pane-initial-dimension="300" orientation="Horizontal" picking-mode="Ignore" style="width: 100%; height: 100%;">
+        <ui:VisualElement picking-mode="Ignore">
+            <uie:Toolbar name="ControlToolbar" style="justify-content: space-between; background-color: rgb(56, 56, 56);">
+                <EtienneEditor.Animator2D.TimelineButtonHolder />
+                <ui:VisualElement name="LeftToolbar" class="button-leftaligned" style="flex-direction: row; display: none;">
+                    <uie:ToolbarButton name="First" focusable="false" class="control-button">
+                        <ui:VisualElement style="background-image: resource(&apos;d_Animation.LastKey&apos;);" />
+                    </uie:ToolbarButton>
+                    <uie:ToolbarButton name="Previous" class="control-button">
+                        <ui:VisualElement style="background-image: resource(&apos;d_Animation.PrevKey&apos;);" />
+                    </uie:ToolbarButton>
+                    <uie:ToolbarButton name="Play" class="control-button">
+                        <ui:VisualElement style="background-image: resource(&apos;d_Animation.Play&apos;);" />
+                    </uie:ToolbarButton>
+                    <uie:ToolbarButton name="Next" class="control-button">
+                        <ui:VisualElement style="background-image: resource(&apos;d_Animation.NextKey&apos;);" />
+                    </uie:ToolbarButton>
+                    <uie:ToolbarButton name="Last" class="control-button">
+                        <ui:VisualElement style="background-image: resource(&apos;d_Animation.LastKey&apos;);" />
+                    </uie:ToolbarButton>
+                </ui:VisualElement>
+                <ui:VisualElement name="RightToolbar" style="flex-direction: row-reverse;">
+                    <uie:IntegerField is-delayed="true" value="30" name="FPS" style="min-width: 35px;" />
+                </ui:VisualElement>
+            </uie:Toolbar>
+            <uie:Toolbar style="justify-content: space-between; background-color: rgb(56, 56, 56);">
+                <uie:ToolbarMenu display-tooltip-when-elided="true" text="Select an Animation 2D" style="width: 205px;" />
+                <ui:VisualElement class="button-rightaligned" style="flex-direction: row-reverse;">
+                    <uie:ToolbarButton display-tooltip-when-elided="true" name="EventButton" class="control-button">
+                        <ui:VisualElement style="background-image: resource(&apos;d_Animation.EventMarker&apos;);" />
+                    </uie:ToolbarButton>
+                </ui:VisualElement>
+            </uie:Toolbar>
+            <ui:VisualElement name="Inspector" style="width: 100%; height: 100%;" />
+        </ui:VisualElement>
+        <EtienneEditor.Animator2D.SplitView orientation="Vertical" fixed-pane-initial-dimension="350" style="flex-direction: column;">
+            <ui:VisualElement name="Preview" style="-unity-background-scale-mode: scale-to-fit;" />
+            <EtienneEditor.Animator2D.Timeline description="dfgdfgdfg" Count="38" style="margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; flex-wrap: nowrap; background-color: rgba(56, 56, 56, 255);" />
+        </EtienneEditor.Animator2D.SplitView>
+    </EtienneEditor.Animator2D.SplitView>
+</ui:UXML>

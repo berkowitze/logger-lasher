@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 289bc996b5dd9d54d8eef48bb17a3e1e, type: 3}
+  m_Name: DemoPlayerRun
+  m_EditorClassIdentifier: 
+  duration: 0.6666667
+  fps: 12
+  frames:
+  - sprite: {fileID: 242350314, guid: 596b554e7281d9741b88791ec9ec01d9, type: 3}
+    duration: 1
+  - sprite: {fileID: 876926413, guid: 596b554e7281d9741b88791ec9ec01d9, type: 3}
+    duration: 1
+  - sprite: {fileID: 654521724, guid: 596b554e7281d9741b88791ec9ec01d9, type: 3}
+    duration: 1
+  - sprite: {fileID: 1915051662, guid: 596b554e7281d9741b88791ec9ec01d9, type: 3}
+    duration: 1
+  - sprite: {fileID: 142125045, guid: 596b554e7281d9741b88791ec9ec01d9, type: 3}
+    duration: 1
+  - sprite: {fileID: -1843046807, guid: 596b554e7281d9741b88791ec9ec01d9, type: 3}
+    duration: 1
+  - sprite: {fileID: -1698637591, guid: 596b554e7281d9741b88791ec9ec01d9, type: 3}
+    duration: 1
+  - sprite: {fileID: 1463215466, guid: 596b554e7281d9741b88791ec9ec01d9, type: 3}
+    duration: 1
+  timedAnimationEvents: []

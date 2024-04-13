@@ -1,0 +1,16 @@
+{
+    "name": "Etienne.Animator2D",
+    "rootNamespace": "",
+    "references": [
+        "GUID:22ded8885bc72c54599b382643fa9d31"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
