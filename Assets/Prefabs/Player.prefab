@@ -49,19 +49,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   damage: 1
+  onHitParticles: {fileID: 5441731513418778848}
   branchPrefab: {fileID: 8730505888089025680, guid: 2aa437bd0d8c141638c164c974e227d9, type: 3}
   branchAnim: {fileID: 5414719464240942369, guid: 578ece957a5024f1da5cf4b51783d083, type: 3}
   healthBar: {fileID: 7209466473075081835}
   healthBarFill: {fileID: 1170080229190394978}
-  FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
-  ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
+  fullhealthColor: {r: 0, g: 1, b: 0, a: 1}
+  zeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
   policyBar: {fileID: 359606936211935703}
   policyBarFill: {fileID: 5878470248680201424}
-  ZeroPolicyColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
-  FullPolicyColor: {r: 0, g: 0, b: 1, a: 1}
-  onHitParticles: {fileID: 5441731513418778848}
-  shakeDuration: 0.3
-  shakeMagnitude: 0.06
+  zeroPolicyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  fullPolicyColor: {r: 0, g: 0, b: 1, a: 1}
+  leaves:
+  - {fileID: 3563905588680046420}
+  - {fileID: 8559241485839524086}
+  - {fileID: 8710981434511146474}
+  - {fileID: 8537221705237566619}
+  - {fileID: 2024081450180980633}
+  - {fileID: 8912722254002791640}
+  - {fileID: 4041249409665148065}
+  - {fileID: 8499815628426228657}
+  - {fileID: 3059278162716318404}
 --- !u!1 &2606520983586141046
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,6 +862,26 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3548567130954890168}
   m_SourcePrefab: {fileID: 100100000, guid: 250a1470994bf49509fa12cacccecbca, type: 3}
+--- !u!1 &2024081450180980633 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6562889748348933850, guid: 250a1470994bf49509fa12cacccecbca, type: 3}
+  m_PrefabInstance: {fileID: 5116909612286261571}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3059278162716318404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7887587906704532359, guid: 250a1470994bf49509fa12cacccecbca, type: 3}
+  m_PrefabInstance: {fileID: 5116909612286261571}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3563905588680046420 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8536400945726557719, guid: 250a1470994bf49509fa12cacccecbca, type: 3}
+  m_PrefabInstance: {fileID: 5116909612286261571}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4041249409665148065 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9157943139577863650, guid: 250a1470994bf49509fa12cacccecbca, type: 3}
+  m_PrefabInstance: {fileID: 5116909612286261571}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4650058235278515880 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 250a1470994bf49509fa12cacccecbca, type: 3}
@@ -885,3 +913,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 4.4095645, z: 1}
   m_Center: {x: 0, y: 2.0800095, z: 0}
+--- !u!1 &8499815628426228657 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3672548509089925874, guid: 250a1470994bf49509fa12cacccecbca, type: 3}
+  m_PrefabInstance: {fileID: 5116909612286261571}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8537221705237566619 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3564783574603935192, guid: 250a1470994bf49509fa12cacccecbca, type: 3}
+  m_PrefabInstance: {fileID: 5116909612286261571}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8559241485839524086 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3587788796799408565, guid: 250a1470994bf49509fa12cacccecbca, type: 3}
+  m_PrefabInstance: {fileID: 5116909612286261571}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8710981434511146474 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4620282718447106903, guid: 250a1470994bf49509fa12cacccecbca, type: 3}
+  m_PrefabInstance: {fileID: 5116909612286261571}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8912722254002791640 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4373755574485294491, guid: 250a1470994bf49509fa12cacccecbca, type: 3}
+  m_PrefabInstance: {fileID: 5116909612286261571}
+  m_PrefabAsset: {fileID: 0}

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEditor.Playables;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class PlayerController : MonoBehaviour
     public Image policyBarFill;
     public Color zeroPolicyColor = Color.gray;
     public Color fullPolicyColor = Color.blue;
+
+    public GameObject[] leaves;
 
     private KeyCode? bufferKey = null;
     private readonly int numBufferFrames = 7;
@@ -78,6 +81,8 @@ public class PlayerController : MonoBehaviour
             slotToBranch.Add(i, branchController);
             branchController.Setup(i);
         }
+
+        Util.Shuffle(leaves);
     }
 
     void Update()
@@ -181,6 +186,11 @@ public class PlayerController : MonoBehaviour
 
     void UpdateHealthBar()
     {
+        int leavesShowing = (int)Util.Remap(currentHealth, 0, maxHealth, leaves.Length, 0);
+        for (int i = 0; i < leavesShowing; i++)
+        {
+            leaves[i].SetActive(false);
+        }
         healthBar.value = Mathf.Clamp(currentHealth, 0, maxHealth);
         healthBarFill.color = Color.Lerp(zeroHealthColor, fullhealthColor, currentHealth / (float)maxHealth);
     }
