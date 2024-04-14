@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BranchController : MonoBehaviour
 {
-    private int m_branchSlot; // 0-7
     public LayerMask enemyLayerMask;
+
+    private int m_branchSlot; // integer from 0-7
+    private readonly float maxHitDistance = 10f;
 
     public void Setup(int branchSlot)
     {
@@ -14,12 +14,23 @@ public class BranchController : MonoBehaviour
 
     public void Attack()
     {
-        RaycastHit hit;
-        bool hasHit = Physics.Raycast(transform.position, Quaternion.Euler(0, 45 * m_branchSlot, 0) * Vector3.right, out hit, 10.0f, enemyLayerMask);
+        PlayAnimation();
+        // Cast out a ray in the branch direction to determine the first enemy hit, if any.
+        bool hasHit = Physics.Raycast(
+            transform.position,
+            Quaternion.Euler(0, 45 * m_branchSlot, 0) * Vector3.right,
+            out RaycastHit hit,
+            maxHitDistance,
+            enemyLayerMask
+        );
         if (hasHit)
         {
-            hit.collider.gameObject.GetComponent<EnemyController>().TakeDamage(1);
+            hit.collider.GetComponent<EnemyController>().TakeDamage(1);
         }
+    }
+
+    public void PlayAnimation()
+    {
         GetComponent<Animator>().SetTrigger("Attack");
     }
 }

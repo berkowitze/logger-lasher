@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PolicyController : MonoBehaviour
@@ -12,22 +10,27 @@ public class PolicyController : MonoBehaviour
     private float xCenter;
     private float zCenter;
     private float angle;
+    private float initialAngle;
 
 
     void Start()
     {
         a = Random.Range(5.5f, 7f);
         b = Random.Range(5.5f, 7f);
-        xCenter = Random.Range(-2f, 2f);
-        zCenter = Random.Range(-2f, 2f);
+        xCenter = Random.Range(-1.8f, 1.8f);
+        zCenter = Random.Range(-1.8f, 1.8f);
         angle = Random.Range(0f, 2f * Mathf.PI);
+        initialAngle = angle;
         UpdatePosition();
-        Destroy(gameObject, 4.0f);
     }
 
     void Update()
     {
         angle += Time.deltaTime * speed;
+        if (angle > initialAngle + 2 * Mathf.PI) // If powerup has gone in a full circle, destroy it
+        {
+            Destroy(gameObject);
+        }
     }
 
     void FixedUpdate()

@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public enum GameDifficulty
 {
@@ -26,7 +23,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        kills = 0;
         StartCoroutine(GameLoop());
     }
 
@@ -49,6 +45,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PlayGame()
     {
+        kills = 0;
+
         GameObject player = Instantiate(playerPrefab);
         PlayerController playerController = player.GetComponent<PlayerController>();
         playerController.Setup(difficulty);
@@ -62,17 +60,21 @@ public class GameManager : MonoBehaviour
             {
                 break;
             }
+            UpdateKillCount();
             yield return null;
         }
-        yield return new WaitForSeconds(3.0f);
+        if (playerController.IsDead())
+        {
+            // only do this if the player is dead, not if they pressed escape
+            yield return new WaitForSeconds(2.5f);
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     }
 
-
-    // Update is called once per frame
-    void Update()
+    public void AddKill()
     {
-        UpdateKillCount();
+        kills++;
     }
 
     void UpdateKillCount()
@@ -93,10 +95,5 @@ public class GameManager : MonoBehaviour
     public void SetHardDifficulty()
     {
         SetDifficulty(GameDifficulty.HARD);
-    }
-
-    public void AddKill()
-    {
-        kills++;
     }
 }

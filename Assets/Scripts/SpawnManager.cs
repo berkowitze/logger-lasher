@@ -22,23 +22,34 @@ public class SpawnManager : MonoBehaviour
 
     public void Setup(GameDifficulty difficultyToSet)
     {
-        waveNumber = 1;
+        // it's important to set difficulty before filling slots,
+        // otherwise might spawn diagonal opponents on easy mode in wave 1
         difficulty = difficultyToSet;
-        SpawnWave();
+        waveNumber = 1;
+        FillSlots(waveNumber);
+        Invoke(nameof(SpawnWave), 2f);
     }
 
 
     private void SpawnWave()
     {
-        if (Random.value < chanceOfPolicySpawnPerWave)
-        {
-            Instantiate(policyPrefab);
-        }
         // If all slots are empty, start the next wave after secondsBetweenWaves seconds
         int leftToSpawn = enemiesInSlot.Sum();
         if (leftToSpawn == 0)
         {
+            if (Random.value < chanceOfPolicySpawnPerWave)
+            {
+                // Spawn more policies in later rounds
+                for (int i = 0; i < Random.Range(1, waveNumber / 5 + 1); i++)
+                {
+                    Instantiate(policyPrefab);
+                }
+            }
             waveNumber++;
+            if (waveNumber > 10)
+            {
+                chanceOfPolicySpawnPerWave = 1.0f; // in later rounds, guarantee policy spawn each round
+            }
             FillSlots(waveNumber);
             Invoke(nameof(SpawnWave), secondsBetweenWaves);
             return;
@@ -102,10 +113,5 @@ public class SpawnManager : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(0, spawnAngle, 0);
         Vector3 xzPosition = rotation * Vector3.forward * spawnDistance;
         return new Vector3(xzPosition.x, enemyPrefab.transform.position.y, xzPosition.z);
-    }
-
-    void Update()
-    {
-
     }
 }

@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f78617d4603a48fa88ef09a785217f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 8969917196362660886, guid: f70e18c48a3244773837991107b03bed, type: 3}
+  enemyPrefab: {fileID: 3823791886489048894, guid: b0fe81ea2b21b49e9b6ca2de2a252a77, type: 3}
   policyPrefab: {fileID: 7780707658200752236, guid: 0d9395f9823dc408d97b5a9b0eb8446f, type: 3}
   secondsBetweenWaves: 2
   spawnDistance: 8
   secondsBetweenEnemiesAvg: 0.4
   secondsBetweenEnemiesRange: 0.1
-  chanceOfPolicySpawnPerWave: 0.25
+  chanceOfPolicySpawnPerWave: 0.7
