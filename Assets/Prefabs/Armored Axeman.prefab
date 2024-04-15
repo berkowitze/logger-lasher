@@ -2489,7 +2489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 2
-  speed: 5
+  speed: 5.5
   playerHitboxLayer:
     serializedVersion: 2
     m_Bits: 128

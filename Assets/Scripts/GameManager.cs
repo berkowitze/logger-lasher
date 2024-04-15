@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject spawnerPrefab;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI gameOverText;
 
     private GameDifficulty difficulty = GameDifficulty.UNSET;
     private int kills;
@@ -74,6 +75,8 @@ public class GameManager : MonoBehaviour
         }
         if (playerController.IsDead())
         {
+            gameOverText.gameObject.SetActive(true);
+            gameOverText.gameObject.GetComponent<GameOverText>().StartFade();
             // only do this if the player is dead, not if they pressed escape
             yield return new WaitForSeconds(2.5f);
         }
