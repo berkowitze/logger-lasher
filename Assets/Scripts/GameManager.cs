@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
             gameOverText.gameObject.SetActive(true);
             gameOverText.gameObject.GetComponent<GameOverText>().StartFade();
             // only do this if the player is dead, not if they pressed escape
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(4f);
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
