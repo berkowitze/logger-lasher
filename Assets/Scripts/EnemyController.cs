@@ -2,25 +2,28 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public float stopDistance; // distance from origin that enemies will stop at
+    public int health;
     public float speed;
-    public float speedRange; // range of random amount of speed to subtract/add to speed
+
     public LayerMask playerHitboxLayer;
+    public GameObject[] armorPieces;
+    public GameObject armorGroup;
+
+    public float stopDistance; // distance from origin that enemies will stop at
+    public float speedRange; // range of random amount of speed to subtract/add to speed
+
     public ParticleSystem gotHitParticles;
     public AudioClip[] gotHitClips;
     public AudioClip whackClip;
-
-    private int m_health;
     private readonly float thwackForce = 18; // with how much force to fly away with when killed
     private readonly float thwackRange = 2;
     private Rigidbody enemyRb;
     private float swingCooldown; // how long until enemy can swing again
     private AudioSource audioSource;
 
-    public void Setup(int health)
+    public void Setup()
     {
         audioSource = GetComponent<AudioSource>();
-        m_health = health;
         enemyRb = GetComponent<Rigidbody>();
         speed += Random.Range(-speedRange, speedRange);
         swingCooldown = 0;
@@ -28,7 +31,7 @@ public class EnemyController : MonoBehaviour
 
     bool IsDead()
     {
-        return m_health <= 0;
+        return health <= 0;
     }
 
     void Update()
@@ -45,16 +48,33 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        m_health -= damage;
-        // Delay a bit to align with whack sound a bit better
-        Invoke(nameof(PlayGotHitClip), 0.1f);
-        // Play whack at 15% volume
-        audioSource.PlayOneShot(whackClip, 0.15f);
+        health -= damage;
         // Commented because it causes lag
         // gotHitParticles.Play();
+        if (health == 1)
+        {
+            armorGroup.GetComponent<AudioSource>().pitch = Random.Range(0.7f, 1f);
+            armorGroup.GetComponent<AudioSource>().Play();
+            foreach (SkinnedMeshRenderer m in armorGroup.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                m.gameObject.SetActive(false);
+            }
 
+            foreach (GameObject armorPiece in armorPieces)
+            {
+                armorPiece.SetActive(true);
+                armorPiece.GetComponent<Rigidbody>().AddForce(armorPiece.transform.position * 6, ForceMode.Impulse);
+                armorPiece.GetComponent<Rigidbody>().AddTorque(new Vector3(Random.Range(-15, 15), Random.Range(-15, 15), Random.Range(-15, 15)), ForceMode.Impulse);
+                Destroy(armorPiece, 1f);
+            }
+            return;
+        }
         if (IsDead())
         {
+            // Delay a bit to align with whack sound a bit better
+            Invoke(nameof(PlayGotHitClip), 0.1f);
+            // Play whack at 15% volume
+            audioSource.PlayOneShot(whackClip, 0.15f);
             GetComponent<Animator>().SetTrigger("Die");
             enemyRb.constraints = RigidbodyConstraints.None;
             GetComponent<BoxCollider>().enabled = false; // prevent double hitting the same enemy

@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using UnityEditor.Playables;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public GameObject[] leaves;
 
     private KeyCode? bufferKey = null;
-    private readonly int numBufferFrames = 7;
+    private readonly int numBufferFrames = 5;
     private int bufferFramesLeft = 3;
     private readonly Dictionary<(KeyCode, KeyCode?), int> cardinalDirectionToSlot = new(){
         {(KeyCode.W, null), 6},
@@ -213,6 +212,9 @@ public class PlayerController : MonoBehaviour
     {
         // Don't allow going over progressNeeded
         policyProgress = Mathf.Min(policyProgress + 1, progressNeeded);
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.pitch = Random.Range(0.9f, 1.1f);
+        audioSource.Play();
     }
 
     public bool IsDead()

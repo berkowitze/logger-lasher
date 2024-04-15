@@ -4,7 +4,7 @@ public class Axe : MonoBehaviour
 {
     public LayerMask playerHitboxLayer;
 
-    private readonly int damage = 5;
+    public int damage;
 
     private readonly float pitchMin = 0.5f;
     private readonly float pitchMax = 0.9f;

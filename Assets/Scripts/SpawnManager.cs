@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public GameObject weakEnemyPrefab;
+    public GameObject strongEnemyPrefab;
     public GameObject policyPrefab;
 
     public float secondsBetweenWaves;
@@ -14,10 +15,14 @@ public class SpawnManager : MonoBehaviour
 
     public float chanceOfPolicySpawnPerWave;
 
+    // every wave, waveNumber enemies will be spawned.
     private int waveNumber;
-    // every wave, waveNumber enemies will be spawned one at a time
-    // number of enemies to spawn in each direction (index i = 45 * i degrees from x axis)
-    private int[] enemiesInSlot = { 0, 0, 0, 0, 0, 0, 0, 0 };
+    // first wave to spawn strong enemies in
+    private readonly int firstStrongEnemyWave = 6;
+    // This holds the number of enemies to spawn in each direction (index i = 45 * i degrees from x axis)
+    private readonly int[] weakEnemiesInSlot = { 0, 0, 0, 0, 0, 0, 0, 0 };
+    private readonly int[] strongEnemiesInSlot = { 0, 0, 0, 0, 0, 0, 0, 0 };
+
     private GameDifficulty difficulty;
 
     public void Setup(GameDifficulty difficultyToSet)
@@ -26,7 +31,8 @@ public class SpawnManager : MonoBehaviour
         // otherwise might spawn diagonal opponents on easy mode in wave 1
         difficulty = difficultyToSet;
         waveNumber = 1;
-        FillSlots(waveNumber);
+
+        FillSlots(1, 0);
         Invoke(nameof(SpawnWave), 2f);
     }
 
@@ -34,13 +40,13 @@ public class SpawnManager : MonoBehaviour
     private void SpawnWave()
     {
         // If all slots are empty, start the next wave after secondsBetweenWaves seconds
-        int leftToSpawn = enemiesInSlot.Sum();
+        int leftToSpawn = weakEnemiesInSlot.Sum() + strongEnemiesInSlot.Sum();
         if (leftToSpawn == 0)
         {
             if (Random.value < chanceOfPolicySpawnPerWave)
             {
                 // Spawn more policies in later rounds
-                for (int i = 0; i < Random.Range(1, waveNumber / 5 + 1); i++)
+                for (int i = 0; i < Random.Range(2, waveNumber / 5 + 2); i++)
                 {
                     Instantiate(policyPrefab);
                 }
@@ -50,7 +56,9 @@ public class SpawnManager : MonoBehaviour
             {
                 chanceOfPolicySpawnPerWave = 1.0f; // in later rounds, guarantee policy spawn each round
             }
-            FillSlots(waveNumber);
+            int numStrongEnemies = waveNumber < firstStrongEnemyWave ? 0 : waveNumber == firstStrongEnemyWave ? 2 : waveNumber / 4;
+            int numWeakEnemies = waveNumber < firstStrongEnemyWave ? waveNumber : waveNumber == firstStrongEnemyWave ? 0 : waveNumber - (numStrongEnemies * 2);
+            FillSlots(numWeakEnemies, numStrongEnemies);
             Invoke(nameof(SpawnWave), secondsBetweenWaves);
             return;
         }
@@ -63,25 +71,46 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < numToSpawn; i++)
         {
             int slot = RandomSetElement(slotsWithEnemies);
+            bool spawnStrongEnemy = false;
+            if (weakEnemiesInSlot[slot] > 0 && strongEnemiesInSlot[slot] > 0 && Random.value < 0.5)
+            {
+                spawnStrongEnemy = true;
+            }
+            else if (strongEnemiesInSlot[slot] > 0)
+            {
+                spawnStrongEnemy = true;
+            }
+
+            GameObject enemyPrefab = spawnStrongEnemy ? strongEnemyPrefab : weakEnemyPrefab;
             int spawnAngle = slot * 45;
             Quaternion rotation = Quaternion.Euler(0, spawnAngle, 0);
             Vector3 xzPosition = rotation * Vector3.forward * spawnDistance;
             Vector3 position = new Vector3(xzPosition.x, enemyPrefab.transform.position.y, xzPosition.z);
             GameObject enemyGO = Instantiate(enemyPrefab, position, Quaternion.Euler(0, spawnAngle + 180, 0));
-            enemyGO.GetComponent<EnemyController>().Setup(1);
+            enemyGO.GetComponent<EnemyController>().Setup();
             slotsWithEnemies.Remove(slot); // we don't want to send multiple enemies from the same direction
-            enemiesInSlot[slot]--;
+            if (spawnStrongEnemy)
+            {
+                strongEnemiesInSlot[slot]--;
+            }
+            else
+            {
+                weakEnemiesInSlot[slot]--;
+            }
         }
 
-        Invoke(nameof(SpawnWave), Random.Range(secondsBetweenEnemiesAvg - secondsBetweenEnemiesRange, secondsBetweenEnemiesAvg + secondsBetweenEnemiesRange));
+        Invoke(
+            nameof(SpawnWave),
+            Random.Range(secondsBetweenEnemiesAvg - secondsBetweenEnemiesRange, secondsBetweenEnemiesAvg + secondsBetweenEnemiesRange)
+        );
     }
 
     private HashSet<int> GetSlotsWithEnemies()
     {
-        HashSet<int> slotsWithEnemies = new HashSet<int>();
-        for (int i = 0; i < enemiesInSlot.Length; i++)
+        HashSet<int> slotsWithEnemies = new();
+        for (int i = 0; i < weakEnemiesInSlot.Length; i++)
         {
-            if (enemiesInSlot[i] > 0)
+            if (weakEnemiesInSlot[i] > 0 || strongEnemiesInSlot[i] > 0)
             {
                 slotsWithEnemies.Add(i);
             }
@@ -97,21 +126,21 @@ public class SpawnManager : MonoBehaviour
         return setAsList[index];
     }
 
-    private void FillSlots(int numToAdd)
+    private void FillSlots(int numWeakEnemies, int numStrongEnemies)
     {
-        for (int i = 0; i < numToAdd; i++)
+        int numSlots = difficulty == GameDifficulty.EASY ? 4 : 8;
+        int slotMultiplier = difficulty == GameDifficulty.EASY ? 2 : 1;
+
+        for (int i = 0; i < numWeakEnemies; i++)
         {
             int slot = Random.Range(0, difficulty == GameDifficulty.EASY ? 4 : 8);
-            enemiesInSlot[slot * (difficulty == GameDifficulty.EASY ? 2 : 1)]++;
+            weakEnemiesInSlot[slot * slotMultiplier]++;
         }
-    }
 
-    Vector3 GetRandomSpawnPosition()
-    {
-        int numIntervals = difficulty == GameDifficulty.EASY ? 4 : 8;
-        int spawnAngle = 360 / numIntervals * Random.Range(0, numIntervals - 1);
-        Quaternion rotation = Quaternion.Euler(0, spawnAngle, 0);
-        Vector3 xzPosition = rotation * Vector3.forward * spawnDistance;
-        return new Vector3(xzPosition.x, enemyPrefab.transform.position.y, xzPosition.z);
+        for (int i = 0; i < numStrongEnemies; i++)
+        {
+            int slot = Random.Range(0, numSlots);
+            strongEnemiesInSlot[slot * slotMultiplier]++;
+        }
     }
 }

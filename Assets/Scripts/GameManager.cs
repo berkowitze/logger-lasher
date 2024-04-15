@@ -33,11 +33,20 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(GameLoop());
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     IEnumerator MainMenu()
     {
         mainMenu.SetActive(true);
         while (difficulty == GameDifficulty.UNSET)
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Quit();
+            }
             yield return null;
         }
         mainMenu.SetActive(false);
