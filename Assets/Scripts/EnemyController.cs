@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour
     public float stopDistance; // distance from origin that enemies will stop at
     public float speedRange; // range of random amount of speed to subtract/add to speed
 
-    public ParticleSystem gotHitParticles;
+    public ParticleSystem gotHitParticlesPrefab;
     public AudioClip[] gotHitClips;
     public AudioClip whackClip;
     private readonly float thwackForce = 18; // with how much force to fly away with when killed
@@ -49,8 +49,7 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        // Commented because it causes lag
-        // gotHitParticles.Play();
+
         if (health == 1)
         {
             armorGroup.GetComponent<AudioSource>().pitch = Random.Range(0.7f, 1f);
@@ -71,6 +70,15 @@ public class EnemyController : MonoBehaviour
         }
         if (IsDead())
         {
+            ParticleSystem particles = Instantiate(
+                gotHitParticlesPrefab,
+                transform.position + gotHitParticlesPrefab.transform.position.y * Vector3.up,
+                gotHitParticlesPrefab.transform.rotation
+            );
+            // splatter away from center
+            particles.transform.LookAt(particles.transform.position * 1.1f + .3f * Vector3.up);
+            particles.Play();
+            Destroy(particles, 1f);
             // Delay a bit to align with whack sound a bit better
             Invoke(nameof(PlayGotHitClip), 0.1f);
             // Play whack at 15% volume

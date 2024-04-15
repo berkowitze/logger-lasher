@@ -3,6 +3,7 @@ using UnityEngine;
 public class PolicyController : MonoBehaviour
 {
     public float speed;
+    public ParticleSystem onCollectParticles;
 
     // Parameters for ellipse
     private float a;
@@ -11,8 +12,6 @@ public class PolicyController : MonoBehaviour
     private float zCenter;
     private float angle;
     private float initialAngle;
-
-
 
     void Start()
     {
@@ -48,6 +47,14 @@ public class PolicyController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Branch"))
         {
+            ParticleSystem particles = Instantiate(
+                onCollectParticles,
+                gameObject.transform.position,
+                onCollectParticles.gameObject.transform.rotation
+            );
+            particles.gameObject.transform.LookAt(particles.gameObject.transform.position * 1.1f + Vector3.up * 1f);
+            particles.Play();
+            Destroy(particles.gameObject, 1.0f);
             FindObjectOfType<PlayerController>().CollectPolicy();
             Destroy(gameObject);
         }

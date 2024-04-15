@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.9
+  onCollectParticles: {fileID: 3837178606474245601, guid: 5e78e07c2498f4a3b85d183340bb04c3, type: 3}
 --- !u!1001 &8575074411315413098
 PrefabInstance:
   m_ObjectHideFlags: 0
