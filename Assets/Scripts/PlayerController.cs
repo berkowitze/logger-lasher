@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
 
     public GameObject[] leaves;
 
+    public AudioClip slurpClip;
+    public AudioClip healClip;
+
     private KeyCode? bufferKey = null;
     private readonly int numBufferFrames = 5;
     private int bufferFramesLeft = 3;
@@ -185,10 +188,10 @@ public class PlayerController : MonoBehaviour
 
     void UpdateHealthBar()
     {
-        int leavesShowing = (int)Util.Remap(currentHealth, 0, maxHealth, leaves.Length, 0);
-        for (int i = 0; i < leavesShowing; i++)
+        int leavesShowing = Mathf.CeilToInt(Util.Remap(currentHealth, 0, maxHealth, 0, leaves.Length));
+        for (int i = 0; i < leaves.Length; i++)
         {
-            leaves[i].SetActive(false);
+            leaves[i].SetActive(i < leavesShowing);
         }
         healthBar.value = Mathf.Clamp(currentHealth, 0, maxHealth);
         healthBarFill.color = Color.Lerp(zeroHealthColor, fullhealthColor, currentHealth / (float)maxHealth);
@@ -213,8 +216,26 @@ public class PlayerController : MonoBehaviour
         // Don't allow going over progressNeeded
         policyProgress = Mathf.Min(policyProgress + 1, progressNeeded);
         AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.clip = slurpClip;
+        audioSource.volume = .25f;
         audioSource.pitch = Random.Range(0.9f, 1.1f);
         audioSource.Play();
+    }
+
+    public void Heal(int healAmount)
+    {
+        currentHealth = Mathf.Min(maxHealth, currentHealth + healAmount);
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.clip = healClip;
+        audioSource.pitch = Random.Range(0.8f, 1.2f);
+        audioSource.volume = 0.8f;
+        audioSource.clip = audioSource.clip;
+        audioSource.Play();
+    }
+
+    public bool IsMaxHealth()
+    {
+        return currentHealth >= maxHealth;
     }
 
     public bool IsDead()

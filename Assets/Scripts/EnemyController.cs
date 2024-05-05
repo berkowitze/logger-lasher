@@ -21,6 +21,9 @@ public class EnemyController : MonoBehaviour
     private float swingCooldown; // how long until enemy can swing again
     private AudioSource audioSource;
 
+    public GameObject heartPrefab;
+    private readonly float chanceHeartSpawn = 0.1f;
+
     public void Setup()
     {
         audioSource = GetComponent<AudioSource>();
@@ -70,6 +73,14 @@ public class EnemyController : MonoBehaviour
         }
         if (IsDead())
         {
+            if (heartPrefab != null && Random.value < chanceHeartSpawn && !FindObjectOfType<PlayerController>().IsMaxHealth())
+            {
+                Instantiate(
+                    heartPrefab,
+                    transform.position + new Vector3(0, heartPrefab.transform.position.y, 0),
+                    heartPrefab.transform.rotation
+                );
+            }
             ParticleSystem particles = Instantiate(
                 gotHitParticlesPrefab,
                 transform.position + gotHitParticlesPrefab.transform.position.y * Vector3.up,

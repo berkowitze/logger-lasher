@@ -71,6 +71,8 @@ MonoBehaviour:
   - {fileID: 4041249409665148065}
   - {fileID: 8499815628426228657}
   - {fileID: 3059278162716318404}
+  slurpClip: {fileID: 8300000, guid: da68e5bcc722643529b48e468b44d839, type: 3}
+  healClip: {fileID: 8300000, guid: f292f321176fe41f6b31fbbee2b3829c, type: 3}
 --- !u!82 &4652603914536030167
 AudioSource:
   m_ObjectHideFlags: 0

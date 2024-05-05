@@ -65,7 +65,7 @@ public class SpawnManager : MonoBehaviour
 
         // Otherwise, spawn up to 2 (or 3, if on hard mode) enemies in random unique slots
         HashSet<int> slotsWithEnemies = GetSlotsWithEnemies();
-        int maxSimultaneousEnemiesToSpawn = Mathf.Min(leftToSpawn, difficulty == GameDifficulty.EASY ? 2 : 3, slotsWithEnemies.Count);
+        int maxSimultaneousEnemiesToSpawn = Mathf.Min(leftToSpawn, 2, slotsWithEnemies.Count);
         int numToSpawn = Random.Range(1, maxSimultaneousEnemiesToSpawn + 1);
 
         for (int i = 0; i < numToSpawn; i++)
@@ -99,9 +99,11 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
+        float secondsBetween = secondsBetweenEnemiesAvg * (difficulty == GameDifficulty.EASY ? 1f : 1.3f);
+
         Invoke(
             nameof(SpawnWave),
-            Random.Range(secondsBetweenEnemiesAvg - secondsBetweenEnemiesRange, secondsBetweenEnemiesAvg + secondsBetweenEnemiesRange)
+            Random.Range(secondsBetween - secondsBetweenEnemiesRange, secondsBetween + secondsBetweenEnemiesRange)
         );
     }
 

@@ -2390,7 +2390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
-  speed: 7
+  speed: 8
   playerHitboxLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -2406,6 +2406,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e5047e4d4da144a4d8239b4e71ed4b71, type: 3}
   - {fileID: 8300000, guid: 8188e550bc3bd49ad8ebad5f7bd778c9, type: 3}
   whackClip: {fileID: 8300000, guid: 44373d1ec4ea44a02b2cca156919bf20, type: 3}
+  heartPrefab: {fileID: 0}
 --- !u!65 &6911460828226631577
 BoxCollider:
   m_ObjectHideFlags: 0

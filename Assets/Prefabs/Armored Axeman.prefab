@@ -2298,7 +2298,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d10431f64485c4150bb04c092386fe81, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.257
+  m_Volume: 0.2
   m_Pitch: 0.86
   Loop: 0
   Mute: 0
@@ -2488,7 +2488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 2
-  speed: 5.5
+  speed: 6.3
   playerHitboxLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -2516,6 +2516,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e5047e4d4da144a4d8239b4e71ed4b71, type: 3}
   - {fileID: 8300000, guid: 8188e550bc3bd49ad8ebad5f7bd778c9, type: 3}
   whackClip: {fileID: 8300000, guid: 44373d1ec4ea44a02b2cca156919bf20, type: 3}
+  heartPrefab: {fileID: 6850812940669354576, guid: d612e009b23d94446bf3f4b56df5651a, type: 3}
 --- !u!65 &6911460828226631577
 BoxCollider:
   m_ObjectHideFlags: 0
